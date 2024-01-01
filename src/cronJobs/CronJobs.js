@@ -23,13 +23,11 @@ function endOfDayNotification(client) {
     // Read task of day
     let task = await readFromDb("taskOfTheDay");
 
-    // If task of day not empty then notifiy me and stephy saying task is not completed
+    // If task of day not empty then notifiy me and stephy saying task is not completed and close task
     if(task.length === 0) {
       sendMessage(channel, `<@${starOwner}> <@${starManager}> Seems like the task might have been lapsed D:`)
+      await writeToDb("taskOfTheDay", "");
     }
-
-    // Delete the task
-    await writeToDb("taskOfTheDay", "");
   });
 }
 

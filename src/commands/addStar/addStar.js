@@ -1,7 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { starManager } = require('../../../config.json');
-const fs = require('fs');
-const path = require('path');
+const { readFromDb, writeToDb } = require('../../utils/DbUtils');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -12,32 +11,14 @@ module.exports = {
       await interaction.reply('This command is only for StarManagers and you are not one!!!!! D:<');
     }
     else {
-      // write into file for stars :3
-      incrementStars();
-      await interaction.reply('Added a star!');
+      await addStar();
+      await interaction.reply('Added a star! Yipee :D');
     }
 	},
 };
 
-function incrementStars() {
-  const filePath = path.resolve(__dirname, '../../../db', 'stars');
-  fs.readFile(filePath, 'utf8', (err, starsCount) => {
-    if (err) {
-      console.error('Error reading the file:', err);
-      return;
-    }
-    // Print the content of the file
-    console.log('File content:', starsCount);
-    let newStarsCount = (Number(starsCount)+1).toString();
-
-    fs.writeFile(filePath, newStarsCount, 'utf8', (err) => {
-      if (err) {
-        console.error('Error writing to file:', err);
-        return;
-      }
-      console.log('Content has been written to the file successfully.');
-    });
-
-  });
-
+async function addStar() {
+  const starsCount = await readFromDb("stars");
+  let newStarsCount = (Number(starsCount)+1).toString();
+  writeToDb("stars", newStarsCount);
 }

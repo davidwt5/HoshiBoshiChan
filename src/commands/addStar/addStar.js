@@ -12,7 +12,8 @@ module.exports = {
     }
     else {
       let starsCount = await addStar();
-      await interaction.reply(`<@${starOwner}>  Added a star! You are now at ${starsCount} stars! Yipee :D`);
+      await interaction.reply(`<@${starOwner}>  Good job on completing the task! I gib u star, you're now at ${starsCount} stars! Yipee :D`);
+      await writeToDb("taskOfTheDay", "");
     }
 	},
 };

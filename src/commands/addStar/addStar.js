@@ -20,6 +20,6 @@ module.exports = {
 async function addStar() {
   const starsCount = await readFromDb("stars");
   let newStarsCount = (Number(starsCount)+1).toString();
-  writeToDb("stars", newStarsCount);
+  await writeToDb("stars", newStarsCount);
   return newStarsCount;
 }

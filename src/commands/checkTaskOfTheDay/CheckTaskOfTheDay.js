@@ -7,6 +7,10 @@ module.exports = {
 		.setDescription('Checks the task of the day'),
 	async execute(interaction) {
     const taskOfTheDay = await readFromDb("taskOfTheDay");
-    await interaction.reply(`Your task today is "${taskOfTheDay}" :cowboy:`);
+		if (!taskOfTheDay) {
+			await interaction.reply(`You haven't set any tasks for today :clown:`);
+		} else {
+			await interaction.reply(`Your task today is "${taskOfTheDay}" :cowboy:`);
+		}
 	},
 };

@@ -6,8 +6,8 @@
 	"token": "bot_token",
 	"clientId": "bot_client_id",
 	"guildId": "server_id",
-	"starManager": "username_of_star_manager",
-	"starOwner": "username_of_star_owner"
+	"starManager": "id_of_star_manager",
+	"starOwner": "id_of_star_owner"
 }
 ```
 - Deploy the slash commands by running 

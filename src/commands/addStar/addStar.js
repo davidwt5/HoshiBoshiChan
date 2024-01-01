@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js');
-const { starManager } = require('../../../config.json');
+const { starManager, starOwner } = require('../../../config.json');
 const { readFromDb, writeToDb } = require('../../utils/DbUtils');
 
 module.exports = {
@@ -7,12 +7,12 @@ module.exports = {
 		.setName('addstar')
 		.setDescription('Adds a star'),
 	async execute(interaction) {
-    if (interaction.user.username !== starManager) {
+    if (interaction.user.id !== starManager) {
       await interaction.reply('This command is only for StarManagers and you are not one!!!!! D:<');
     }
     else {
-      await addStar();
-      await interaction.reply('Added a star! Yipee :D');
+      let starsCount = await addStar();
+      await interaction.reply(`<@${starOwner}>  Added a star! You are now at ${starsCount} stars! Yipee :D`);
     }
 	},
 };
@@ -21,4 +21,5 @@ async function addStar() {
   const starsCount = await readFromDb("stars");
   let newStarsCount = (Number(starsCount)+1).toString();
   writeToDb("stars", newStarsCount);
+  return newStarsCount;
 }

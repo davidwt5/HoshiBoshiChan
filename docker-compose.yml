@@ -1,0 +1,14 @@
+version: '3'
+services:
+  hoshi-boshi-chan:
+    build: .
+    image: hoshi-boshi-chan
+    container_name: hoshi-boshi-chan
+    restart: always
+    # Expose the necessary ports
+    ports:
+      - "443:443" # Adjust port numbers as needed
+      - "80:80"
+    # Specify volumes if needed to persist data or configs
+    volumes:
+      - ./db:/usr/src/app/db # Replace with your bot's files location

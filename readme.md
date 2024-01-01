@@ -1,4 +1,8 @@
 # Instructions
+## Build Mode
+- Run ```docker-compose up -d```
+
+## Dev Mode
 - Run init.sh
 - Inside ./config.json, configure the following properties:
 ```json
@@ -19,3 +23,5 @@ npm run deployCommands
 ```javascript
 npm run start
 ```
+
+

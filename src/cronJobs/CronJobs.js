@@ -3,6 +3,7 @@ const { channelId, starOwner, starManager } = require('../../config.json');
 const { readFromDb, writeToDb } = require('../utils/DbUtils');
 
 function startCronJobs(client) {
+  cron.tz.setDefault('Australia/Melbourne');
   startOfDayNotification(client);
   endOfDayNotification(client);
 }

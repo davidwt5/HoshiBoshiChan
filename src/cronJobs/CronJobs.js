@@ -24,7 +24,7 @@ function endOfDayNotification(client) {
     let task = await readFromDb("taskOfTheDay");
 
     // If task of day not empty then notifiy me and stephy saying task is not completed and close task
-    if(task.length === 0) {
+    if(task.length !== 0) {
       sendMessage(channel, `<@${starOwner}> <@${starManager}> Seems like the task might have been lapsed D:`)
       await writeToDb("taskOfTheDay", "");
     }
